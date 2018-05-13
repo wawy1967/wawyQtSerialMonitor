@@ -19,8 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
                           "Carriage return","Both NL & CR"};
     ui->comboBoxBaudRate->addItems(baudRate);
     ui->comboBoxEndLine->addItems(endLine);
-    static const quint16 uno_vendor_id = 9025;
-    static const quint16 uno_product_id = 67;
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
     {
 
@@ -28,11 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
             serialPortInfo.hasProductIdentifier())
         {
             serialPortName = serialPortInfo.portName();
-            if ((serialPortInfo.vendorIdentifier()==uno_vendor_id) &&
-                 (serialPortInfo.productIdentifier()==uno_product_id))
-            {
-                arduino_is_available = true;
-            }
+            arduino_is_available = true;
         }
     }
     if (arduino_is_available)
